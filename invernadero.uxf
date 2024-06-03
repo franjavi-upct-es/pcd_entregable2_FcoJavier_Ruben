@@ -1,21 +1,51 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>180</x>
-      <y>70</y>
-      <w>210</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>Invernadero
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>464</x><y>112</y><w>168</w><h>80</h></coordinates><panel_attributes>*Sistema IoT*
 --
-+ temperatura
++suscriptores = list()
 --
-#Operation(i: int): int
-/+AbstractOperation()/
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-</diagram>
++ alta_suscriptor()
++ baja_suscriptor()
++ notificar_suscriptores()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>696</x><y>112</y><w>168</w><h>64</h></coordinates><panel_attributes>*Suscriptor*
+--
+
+
+--
++ actualizar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>536</x><y>288</y><w>168</w><h>64</h></coordinates><panel_attributes>*Sensor*
+--
+
+
+--
++ actualizar()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>800</x><y>288</y><w>168</w><h>64</h></coordinates><panel_attributes>*Dueño Invernadero*
+--
+
+
+--
++ actualizar()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>192</x><y>440</y><w>120</w><h>64</h></coordinates><panel_attributes>*Strategy*
+--
+
+
+--
++ calcular_estadistico()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>632</y><w>128</w><h>64</h></coordinates><panel_attributes>*StrategyMeanStdev*
+--
+
+
+--
++ calcular_estadistico()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>184</x><y>632</y><w>128</w><h>64</h></coordinates><panel_attributes>*StrategyQuantiles*
+--
+
+
+--
++ calcular_estadistico()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>376</x><y>632</y><w>128</w><h>64</h></coordinates><panel_attributes>*StrategyMaxMin*
+--
+
+
+--
++ calcular_estadistico()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>48</x><y>496</y><w>216</w><h>152</h></coordinates><panel_attributes>lt=&lt;&lt;-
+
+</panel_attributes><additional_attributes>250;10;250;90;10;90;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>496</y><w>216</w><h>152</h></coordinates><panel_attributes>lt=&lt;&lt;-
+
+</panel_attributes><additional_attributes>10;10;10;90;250;90;250;170</additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>496</y><w>24</w><h>152</h></coordinates><panel_attributes>lt=&lt;&lt;-
+
+</panel_attributes><additional_attributes>10;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>616</x><y>168</y><w>176</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>200;10;200;80;10;80;10;150</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>136</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>768</x><y>168</y><w>136</w><h>136</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80;150;80;150;150</additional_attributes></element></diagram>
