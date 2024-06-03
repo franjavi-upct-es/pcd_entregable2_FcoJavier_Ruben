@@ -3,9 +3,12 @@ import time
 import random
 from statistics import *
 from abc import abstractmethod, ABC
+from confluent_kafka import Producer, Consumer, KafkaException
+import json
 
 class ValueError(Exception):
     pass
+
 
 
 class Suscriptor(ABC):
@@ -14,24 +17,20 @@ class Suscriptor(ABC):
     def actualizar(self, evento):
         pass
 
-class DueñoInvernadero(Suscriptor):
-    def __init__(self, nombre, id):
-        self.nombre = nombre
-        self._id = id
-
-    def actualizar(self, evento):
-        return evento
-    
-
 # Definición de la clase Sensor
 class Sensor:
     def __init__(self, id:int):
         self._id = id
+        self.temperatura = None
+        self.producer = Producer({'bootstrap.servers': 'localhost:9092'})
 
     def enviar_informacion(self, timestamp:str, t:int):
         time.sleep(5)
         timestamp = datetime.strptime(timestamp)    # Convierte un str en un fecha que pueda procesar
-        return (timestamp, t)
+        self.temperatura = t
+        data = (timestamp, t)
+        self.producer.produce('Temperaturas', value=json.dumps(data))
+        return data
         
 class Handler(ABC):
     def __init__(self):
@@ -88,38 +87,41 @@ class StrategyMaxMin(StrategyHandler):
 
         return max(temperaturas), min(temperaturas)
 
-"""
-def procesamiento_nuevos_datos(self):
-        # Filtrar los datos de los últimos 60s
-        datos_ultimo_minuto = list(filter(lambda x: time.time() - x.timestamp <= 60, self.data))
+class TemperatureThresholdHandler(Handler):
+    def handle(self, data):
+        temp_max = max(data, key = lambda x: x[1])[1]
+        if temp_max > 30:
+            print(f"Alerta: Temperatura máxima supera el umbral: {temp_max}")
+        if self.next_handler:
+            return self.next_handler.handle(data)
+        return None
 
-        temperaturas = list(map(lambda x: x.t, datos_ultimo_minuto))
+class TemperatureIncreaseHandler(Handler):
+    def handle(self, data):
+        sorted_data = sorted(data, key=lambda x: x[0])
+        for i in range(1, len(sorted_data)):
+            if sorted_data[i][0] - sorted_data[i-1][0] <= 30 and sorted_data[i][1] - sorted_data[i-1][1] > 10:
+                print(f"Alerta: La temperatura ha aumentado más de 10 grados en los últimos 30 segundos: {sorted_data[i][1]}")
+        if self.next_handler:
+            return self.next_handler.handle(data)
+        return None   
 
-        # Evitamos la posibilidad de que "temperatura" sea una lista vacía
-        if len(temperaturas) == 0:
-            raise ValueError
-
-        temp_media = mean(temperaturas)
-        print(f"Temperatura media de los últimos 60 segundos: {temp_media}")
-        
-        # Comprobar si la temperatura media es mayor de un límite establecido
-        temp_actual = self.data[-1].t
-        if temp_actual > 30:
-            print(f"Temperatura alta")
-
-        desviacion_tipica = stdev(temperatura)
-
-        datos_treinta_segundos = list(filter(lambda x: time.time() - x.timestamp <= 30, self.data))
-        if len(datos_treinta_segundos) >= 2 and datos_treinta_segundos[-1].t - datos_treinta_segundos[0].t > 10:
-            print("La temperatura ha aumentado más de 10 grados en los últimos 30 segundos")
-"""
 
 class IoTSystem:
     
     _instance = None
 
     def __init__(self):
+        self.strategy_handlers = [StrategyMeanStdev(), StrategyQuantiles(), StrategyMaxMin()]
+        for i in range(len(self.strategy_handlers) - 1):
+            self.strategy_handlers[i].set_next(self.strategy_handlers[i + 1])
         self.suscriptores = []
+        self.consumer = Consumer({
+            'bootstrap.servers': 'localhost:9092',
+            'group.id': 'iot_system',
+            'auto.offset.reset': 'earliest'
+        })
+        self.consumer.subscribe(['Temperaturas'])
 
     @classmethod
     def obtener_instancia(cls):
@@ -131,3 +133,21 @@ class IoTSystem:
     def nuevos_datos(self, data):
         self.data.append(data)
         self.procesamiento_nuevos_datos()
+
+    def procesamiento_nuevos_datos(self):
+        for handler in self.strategy_handlers:
+            handler.handle(self.data)
+
+    def notificar_suscriptores(self):
+        for suscriptor in self.suscriptores:
+            suscriptor.actualizar(self.sensor.temperatura)
+
+class DueñoInvernadero(Suscriptor):
+
+    def __init__(self, nombre, id):
+        self.nombre = nombre
+        self._id = id
+
+    def actualizar(self, evento):
+        print(f"Último reporte de temperatura: {evento}")
+        return evento
