@@ -1,30 +1,3 @@
----
-output:
-  pdf_document: 
-    toc_depth: 4
-header-includes:
-- \renewcommand{\and}{\\}
-- \usepackage{fvextra}
-- \everymath{\displaystyle}
-- \usepackage{tikz}
-- \usepackage{pgfplots}
-- \setlength{\fboxrule}{1.5pt}
-- \usepackage{amssymb, amsfonts, latexsym, cancel, mathtools}
-- \definecolor{lightblue}{HTML}{007AFF}
-- \newcommand{\bu}[1]{\textcolor{lightblue}{\underline{#1}}}
-- \newcommand{\lb}[1]{\textcolor{lightblue}{#1}}
-- \newcommand{\db}[1]{\textcolor{blue}{#1}}
-- \newcommand{\rc}[1]{\textcolor{red}{#1}}
-- \renewcommand{\CancelColor}{\color{lightblue}}
-- \newcommand{\lbb}[2]{\textcolor{lightblue}{\underbracket[1pt]{\textcolor{black}{#1}}_{#2}}}
-- \newcommand{\dbb}[2]{\textcolor{blue}{\underbracket[1pt]{\textcolor{black}{#1}}_{#2}}}
-- \newcommand{\rub}[2]{\textcolor{red}{\underbracket[1pt]{\textcolor{black}{#1}}_{#2}}}
-- \newcommand{\bboxed}[1]{\fcolorbox{lightblue}{lightblue!10}{$#1$}}
-- \newcommand{\rboxed}[1]{\fcolorbox{red}{red!10}{$#1$}}
-geometry: margin=1.5cm
-fontsize: 12pt
----
-
 # Invernadero IoT System
 
 Este proyecto implementa un sistema de Internet de las Cosas (IoT) para un invernadero. El sistema recoge datos de temperatura de los sensores, los procesa y notifica a los suscriptores sobre los eventos relevantes.
