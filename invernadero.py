@@ -9,7 +9,6 @@ import json
 import pandas as pd
 import pytest
 import random
-import matplotlib.pyplot as plt
 
 class ValueError(Exception):
     pass
