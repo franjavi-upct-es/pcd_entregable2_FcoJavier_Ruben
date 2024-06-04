@@ -4,11 +4,14 @@ from invernadero import *
 
 def test_sensor():
     sensor = Sensor(1)
-    data = sensor.enviar_informacion()
-    assert isinstance(data, tuple)
-    assert len(data) == 2
-    assert isinstance(data[0], str)
-    assert isinstance(data[1], int)
+    data_generator = sensor.enviar_informacion()
+    data = next(data_generator)
+    assert isinstance(data, list)
+    assert len(data) == 1
+    assert isinstance(data[0], tuple)
+    assert len(data[0]) == 2
+    assert isinstance(data[0][0], str)
+    assert isinstance(data[0][1], int)
 
 def test_dueño_invernadero():
     dueño = DueñoInvernadero("John Doe", 1)
@@ -40,9 +43,9 @@ def test_temperature_handlers():
     handler = TemperatureThresholdHandler()
     data = [("2022-01-01 00:00:00", 25), ("2022-01-01 00:01:00", 26), ("2022-01-01 00:02:00", 27)]
     result = handler.handle(data, threshold=30)
-    assert result is None or isinstance(result, dict)
+    assert result is None or isinstance(result, str)
 
     handler = TemperatureIncreaseHandler()
     result = handler.handle(data)
-    assert result is None or isinstance(result, dict)
+    assert result is None or isinstance(result, str)
 
