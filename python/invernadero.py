@@ -48,7 +48,6 @@ class Sensor:
             t = random.randint(15,35)
             data = (timestamp, t)
             self.producer.produce('Temperaturas', value=json.dumps(data)) # SIMULACIÓN DEL ENVÍO DE DATOS AL SERVIDOR DE KAFKA AL TÓPICO DE TEMPERATURAS
-            print(data)
             self.temp_history.append(data)
             if len(self.temp_history) > 30: # ESTE CONDICIONAL NOS PERMITE IR ELIMINANDO 
                                             #LOS EVENTOS QUE YA HEMOS PROCESADO Y MOSTRADO A LOS SUBSCRIPTORES(UNA VEZ PASADO LOS DOS MINUTOS Y MEDIO, SE ELIMINA)
