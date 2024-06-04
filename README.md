@@ -69,7 +69,3 @@ Este proyecto utiliza las siguientes bibliotecas de Python:
 -   **`json`** para serializar y deserializar datos en formato JSON.
 -   **`pandas`** para trabajar con datos en formato de serie y calcular cuantiles.
 -   **`pytest`** para pruebas unitarias.
-
-## Repositorio utilizado para realizar el proyecto
-
-[\bu{Repositorio de Github}](https://github.com/franjavi-upct-es/pcd_entregable2_FcoJavier_Ruben)
