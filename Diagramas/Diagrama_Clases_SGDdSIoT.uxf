@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1287</x>
+      <y>477</y>
+      <w>387</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>*IoTSystem*
+--
+- instance: IoTSystem
++strategy_handlers: list(Strategy)
++suscriptores: list()
++consumer: Consumer
++strategy_handler: StrategyHandler
++temperature_threshold_handler: Temperature_Threshold_Handler
++temperature_increase_handler: Temperature_Increase_Handler
+--
++obtener_instancia()
++ alta_suscriptor(id, nombre)
++ baja_suscriptor(id, nombre)
++procesamiento_de_datos(data)
++ notificar_suscriptores(evento)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2124</x>
+      <y>477</y>
+      <w>189</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>*Suscriptor*
+--
+
+--
++ actualizar(evento)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>981</x>
+      <y>342</y>
+      <w>189</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>*Sensor*
+--
++id: str
++producer: Producer
++temp_history: list()
+--
++producir_información()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2124</x>
+      <y>621</y>
+      <w>189</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>*DueñoInvernadero*
+--
++id: str
++nombre: str
+--
++ actualizar(evento)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>108</x>
+      <y>1305</y>
+      <w>162</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*StrategyMeanStdev*
+--
+
+
+--
++ handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>576</x>
+      <y>1305</y>
+      <w>171</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*StrategyMaxMin*
+--
+
+--
++ handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1665</x>
+      <y>504</y>
+      <w>477</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;510.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2205</x>
+      <y>540</y>
+      <w>27</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1710</x>
+      <y>549</y>
+      <w>198</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Note..
+if not _instance:
+     instance= new IoTSystem()
+return instance</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1215</x>
+      <y>1044</y>
+      <w>261</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>*Temperature_Increase_Handler*
+--
+
+--
++ handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1161</x>
+      <y>369</y>
+      <w>405</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>430.0;120.0;430.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>1044</y>
+      <w>243</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>* Temperature_Threshold_Handler*
+--
+
+--
++ handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>783</x>
+      <y>783</y>
+      <w>252</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>*Handler*
+--
++next_handler: Handler
+
+--
++set_next(Handler)
++handle(data)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>342</x>
+      <y>1044</y>
+      <w>135</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>*StrategyHandler*
+--
+
+--
++ handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>333</x>
+      <y>1305</y>
+      <w>171</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>*StrategyQuantiles*
+--
+
+--
+handle(data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>891</x>
+      <y>909</y>
+      <w>27</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>891</x>
+      <y>585</y>
+      <w>414</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>440.0;10.0;10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>891</x>
+      <y>963</y>
+      <w>477</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;510.0;20.0;510.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>963</y>
+      <w>522</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;90.0;10.0;20.0;560.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>396</x>
+      <y>1107</y>
+      <w>27</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>1215</y>
+      <w>486</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;100.0;10.0;20.0;520.0;20.0;520.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>0</x>
+      <y>1107</y>
+      <w>207</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Note..
+Patrón Strategy para definir las
+diferentes formas de cálculos 
+estadísticos distintos.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>396</x>
+      <y>711</y>
+      <w>279</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Note..
+Patrón Chain of Responsability
+para encadenar el procesamiento de
+los datos proporcionados por el sensor,
+cada manejador específico, realiza su
+procesamiento y llama al método del manejador
+siguiente a través de next_handler.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>729</y>
+      <w>261</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+*handler*</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0;220.0;10.0;220.0;150.0;70.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1719</x>
+      <y>693</y>
+      <w>288</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>Note..
+Patrón Singleton para evitar que se 
+instancie más de un objeto gestor, solo
+queremos un IoTSystem que controle, almacene
+y permita la visualización de los datos por 
+parte de los suscriptores</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1674</x>
+      <y>297</y>
+      <w>270</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Note..
+Patrón Observer que nos permite
+definir el mecanismo de subscripción
+para que los dueños del invernadero 
+estén en todo momento informados
+de los eventos que ocurren en tiempo real.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
